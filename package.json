@@ -1,0 +1,32 @@
+{
+  "name": "meeting-backend",
+  "version": "1.0.0",
+  "description": "Meeting backend using Apollo Server, Graphql and Mongodb",
+  "main": "main.js",
+  "scripts": {
+    "dev": "nodemon ./src/main.ts --exec ts-node",
+    "start": "node ./dist/main.js",
+    "build": "tsc"
+  },
+  "author": "Fernando Jose Aguilar Rivas",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^2.24.0",
+    "bcrypt": "^5.0.1",
+    "dotenv": "^9.0.0",
+    "graphql": "^15.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.12.7",
+    "schemaglue": "^4.1.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typecript": "^0.0.1-security"
+  }
+}
