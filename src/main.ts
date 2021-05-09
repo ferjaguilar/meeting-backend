@@ -1,29 +1,19 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
+import glue from 'schemaglue';
+import connection from './database/connection';
 
-// The GraphQL schema
-const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
-`;
-
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
+const { schema, resolver } = glue('./src/graphql', { mode: 'ts' });
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  typeDefs: schema,
+  resolvers: resolver,
 });
 
 const main = async () => {
   try {
     const { url } = await server.listen();
     console.log(`Server running on ${url}`);
+    connection();
   } catch (error) {
     throw new Error(`Server Error ${error}`);
   }
