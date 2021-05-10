@@ -1,4 +1,27 @@
+### Custom types
+type User {
+  _id: ID
+  name: String
+  lastname: String
+  email: String
+  password: String
+}
+
+### Inputs
+input AddUserInput{
+  name: String!
+  lastname: String!
+  email: String!
+  password: String!
+} 
+
+### Query
 type Query {
   "A simple type for getting started!"
   hello: String
+}
+
+### Mutation
+type Mutation {
+  signup(input: AddUserInput): User
 }
