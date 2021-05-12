@@ -6,3 +6,10 @@ export interface IuserModel extends Document {
   email: string;
   password: string;
 }
+
+export interface Iuser {
+  name: string;
+  lastname: string;
+  email: string;
+  password: string;
+}

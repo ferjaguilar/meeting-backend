@@ -7,6 +7,10 @@ type User {
   password: String
 }
 
+type Token {
+  token: String
+}
+
 ### Inputs
 input AddUserInput{
   name: String!
@@ -15,10 +19,14 @@ input AddUserInput{
   password: String!
 } 
 
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 ### Query
 type Query {
-  "A simple type for getting started!"
-  hello: String
+  login(input: LoginInput): Token
 }
 
 ### Mutation
