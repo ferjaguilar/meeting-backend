@@ -17,7 +17,7 @@ exports.resolver = {
     },
   },
   Mutation: {
-    signup: async (__:void, { input }: any) => {
+    signup: async (__:void, { input }:{input:Iuser}) => {
       // eslint-disable-next-line no-param-reassign
       input.password = bcrypt.hashSync(input.password, 10);
       const findEmail = await userModel.findOne({ email: input.email });
