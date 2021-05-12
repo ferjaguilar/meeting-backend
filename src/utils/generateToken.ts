@@ -3,7 +3,12 @@ import { Iuser } from '../Interfaces/Iusers';
 
 // eslint-disable-next-line arrow-body-style
 const generateToken = (payload:Iuser, secret:string, expiresIn:string) => {
-  return jwt.sign(payload, secret, { expiresIn });
+  const {
+    _id, name, lastname, email,
+  } = payload;
+  return jwt.sign({
+    _id, name, lastname, email,
+  }, secret, { expiresIn });
 };
 
 export default generateToken;

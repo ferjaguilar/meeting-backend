@@ -12,7 +12,7 @@ exports.resolver = {
       if (!bcrypt.compareSync(input.password, findUserInformation.password)) throw new ApolloError('Email! or password not found');
 
       return {
-        token: generateToken(input, String(process.env.SECRET), '24h'),
+        token: generateToken(findUserInformation, String(process.env.SECRET), '24h'),
       };
     },
   },
