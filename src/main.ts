@@ -1,7 +1,7 @@
 import { ApolloServer } from 'apollo-server';
 import glue from 'schemaglue';
 import connection from './database/connection';
-import validateToken from './utils/validateToken';
+import { validateToken } from './utils/tokenUtils';
 
 const { schema, resolver } = glue('./src/graphql', { mode: 'ts' });
 

@@ -11,4 +11,12 @@ const generateToken = (payload:Iuser, secret:string, expiresIn:string) => {
   }, secret, { expiresIn });
 };
 
-export default generateToken;
+const validateToken = (token:string) => {
+  try {
+    return jwt.verify(token, String(process.env.SECRET));
+  } catch (error) {
+    return null;
+  }
+};
+
+export { generateToken, validateToken };

@@ -2,7 +2,7 @@ import { ApolloError, AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
 import { Iuser, IuserContext } from '../Interfaces/Iusers';
 import userModel from '../models/userModel';
-import generateToken from '../utils/generateToken';
+import { generateToken } from '../utils/tokenUtils';
 
 exports.resolver = {
   Query: {
