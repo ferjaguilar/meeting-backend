@@ -16,8 +16,25 @@ type Student {
   completed: Boolean
 }
 
+type Meeting {
+  _id: ID
+  fullname: String
+  formcode: String
+  meeting: EnumSchedule
+  email: String
+  cellphone: String
+  studentId: Student
+}
+
 type Token {
   token: String
+}
+
+### Enum
+enum EnumSchedule {
+  HORAA
+  HORAB
+  HORAC
 }
 
 ### Inputs
@@ -33,13 +50,26 @@ input LoginInput {
   password: String!
 }
 
+input MeetingInput {
+  fullname: String!
+  formcode: String!
+  meeting: EnumSchedule!
+  email: String!
+  cellphone: String!
+  studentId: ID!
+}
+
 ### Query
 type Query {
   login(input: LoginInput): Token
-  getStudent(code: String): Student
+  getStudent(code: String!): Student
+  getMeetings(limit: Int, skip: Int ): [Meeting]
+  getQuantityMeetings: Int
+  getQuantityForTime(schedule: EnumSchedule!): Int
 }
 
 ### Mutation
 type Mutation {
   signup(input: AddUserInput): User
+  addMeeting(input: MeetingInput): Meeting
 }
