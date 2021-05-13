@@ -65,6 +65,7 @@ type Query {
   getStudent(code: String!): Student
   getMeetings(limit: Int, skip: Int ): [Meeting]
   getQuantityMeetings: Int
+  getQuantityForTime(schedule: EnumSchedule!): Int
 }
 
 ### Mutation

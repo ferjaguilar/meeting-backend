@@ -47,6 +47,16 @@ exports.resolver = {
         throw new ApolloError("Can't get quantity meetings");
       }
     },
+    // eslint-disable-next-line max-len
+    getQuantityForTime: async (__:void, { schedule }:{schedule:string}, { user }:{user: IuserContext}) => {
+      if (!user) throw new AuthenticationError('You must be logged in');
+      try {
+        const meetingDB = await meetingModel.countDocuments({ meeting: schedule });
+        return meetingDB;
+      } catch (error) {
+        throw new ApolloError("Can't get quantity meetings for time");
+      }
+    },
   },
   Mutation: {
     signup: async (__:void, { input }:{input:Iuser}, { user }:{user: IuserContext}) => {
