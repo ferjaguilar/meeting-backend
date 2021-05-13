@@ -1,6 +1,6 @@
-import { ApolloError } from 'apollo-server';
+import { ApolloError, AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
-import { Iuser } from '../Interfaces/Iusers';
+import { Iuser, IuserContext } from '../Interfaces/Iusers';
 import userModel from '../models/userModel';
 import generateToken from '../utils/generateToken';
 
@@ -17,7 +17,8 @@ exports.resolver = {
     },
   },
   Mutation: {
-    signup: async (__:void, { input }:{input:Iuser}) => {
+    signup: async (__:void, { input }:{input:Iuser}, { user }:{user: IuserContext}) => {
+      if (!user) throw new AuthenticationError('You must be logged in');
       // eslint-disable-next-line no-param-reassign
       input.password = bcrypt.hashSync(input.password, 10);
       const findEmail = await userModel.findOne({ email: input.email });

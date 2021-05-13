@@ -15,3 +15,12 @@ export interface Iuser {
   email: string;
   password: string;
 }
+
+export interface IuserContext {
+  readonly _id: Types.ObjectId,
+  readonly name: string,
+  readonly lastname: string,
+  readonly email: string,
+  readonly iat: number,
+  readonly exp: number
+}
