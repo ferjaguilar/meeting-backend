@@ -1,6 +1,8 @@
 import { ApolloError, AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
+import { Imeeting } from '../Interfaces/Imeeting';
 import { Iuser, IuserContext } from '../Interfaces/Iusers';
+import meetingModel from '../models/meetingModel';
 import studentModel from '../models/studentModel';
 import userModel from '../models/userModel';
 import { generateToken } from '../utils/tokenUtils';
@@ -35,6 +37,27 @@ exports.resolver = {
       }
       const userDB = await userModel.create(input);
       return userDB;
+    },
+    addMeeting: async (__:void, { input }:{input:Imeeting}) => {
+      const findMeeting = await meetingModel.findOne({ studentId: input.studentId });
+      if (findMeeting) throw new ApolloError('This student already registered');
+      try {
+        const meetingDB = await meetingModel.create(input);
+        await studentModel.findByIdAndUpdate(input.studentId, { completed: true }, { new: true });
+        return meetingDB;
+      } catch (error) {
+        throw new ApolloError('Failed to save your data');
+      }
+    },
+  },
+  Meeting: {
+    studentId: async (parent:Imeeting) => {
+      try {
+        const studentId = await meetingModel.findOne({ studentId: parent.studentId }).populate('studentId');
+        return studentId?.studentId;
+      } catch (error) {
+        throw new ApolloError('Error in relationship');
+      }
     },
   },
 };

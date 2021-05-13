@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import { Imeeting } from '../Interfaces/Imeeting';
+import { ImeetingModel } from '../Interfaces/Imeeting';
 
 const schedule = ['HORAA', 'HORAB', 'HORAC'];
 
@@ -11,6 +11,7 @@ const meetingSchema = new Schema({
     required: [true, 'Formcode is required'],
     min: 4,
     max: 4,
+    unique: true,
   },
   meeting: { type: String, trim: true, enum: schedule },
   email: { type: String, trim: true, required: [true, 'Email is required'] },
@@ -18,4 +19,4 @@ const meetingSchema = new Schema({
   studentId: { type: Schema.Types.ObjectId, required: [true, 'StudentId is required'], ref: 'Students' },
 }, { timestamps: true });
 
-export default mongoose.model<Imeeting>('Meeting', meetingSchema);
+export default mongoose.model<ImeetingModel>('Meeting', meetingSchema);
