@@ -1,6 +1,7 @@
 import { ApolloError, AuthenticationError } from 'apollo-server';
 import bcrypt from 'bcrypt';
 import { Iuser, IuserContext } from '../Interfaces/Iusers';
+import studentModel from '../models/studentModel';
 import userModel from '../models/userModel';
 import { generateToken } from '../utils/tokenUtils';
 
@@ -14,6 +15,13 @@ exports.resolver = {
       return {
         token: generateToken(findUserInformation, String(process.env.SECRET), '24h'),
       };
+    },
+    getStudent: async (__:void, { code }:{ code:string }) => {
+      const studentDB = await studentModel.findOne({ code });
+      if (studentDB?.completed) {
+        throw new ApolloError('Student has already registered', 'NOT_FOUND');
+      }
+      return studentDB;
     },
   },
   Mutation: {

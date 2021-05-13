@@ -7,6 +7,15 @@ type User {
   password: String
 }
 
+type Student {
+  _id: ID
+  name: String
+  lastname: String
+  code: String
+  degree: String
+  completed: Boolean
+}
+
 type Token {
   token: String
 }
@@ -27,6 +36,7 @@ input LoginInput {
 ### Query
 type Query {
   login(input: LoginInput): Token
+  getStudent(code: String): Student
 }
 
 ### Mutation
