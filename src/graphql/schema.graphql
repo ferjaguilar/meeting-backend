@@ -63,6 +63,8 @@ input MeetingInput {
 type Query {
   login(input: LoginInput): Token
   getStudent(code: String!): Student
+  getMeetings(limit: Int, skip: Int ): [Meeting]
+  getQuantityMeetings: Int
 }
 
 ### Mutation

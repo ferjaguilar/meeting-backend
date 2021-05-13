@@ -25,6 +25,28 @@ exports.resolver = {
       }
       return studentDB;
     },
+    // eslint-disable-next-line max-len
+    getMeetings: async (__:void, { limit, skip }:{limit:number, skip:number}, { user }:{user: IuserContext}) => {
+      if (!user) throw new AuthenticationError('You must be logged in');
+      const queryLimit = limit || 5;
+      const querySkip = skip || 0;
+
+      try {
+        const meetingDB = await meetingModel.find().limit(queryLimit).skip(querySkip);
+        return meetingDB;
+      } catch (error) {
+        throw new ApolloError('An error has occurred');
+      }
+    },
+    getQuantityMeetings: async (_:void, __:void, { user }:{user: IuserContext}) => {
+      if (!user) throw new AuthenticationError('You must be logged in');
+      try {
+        const meetingDB = await meetingModel.countDocuments();
+        return meetingDB;
+      } catch (error) {
+        throw new ApolloError("Can't get quantity meetings");
+      }
+    },
   },
   Mutation: {
     signup: async (__:void, { input }:{input:Iuser}, { user }:{user: IuserContext}) => {
