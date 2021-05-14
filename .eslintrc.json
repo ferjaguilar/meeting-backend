@@ -17,6 +17,8 @@
     "rules": {
         "no-console": "off",
         "import/no-unresolved": "off",
-        "import/extensions": "off"
+        "import/extensions": "off",
+        "max-len": "off",
+        "implicit-arrow-linebreak": "off"
     }
 }
