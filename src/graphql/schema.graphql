@@ -63,6 +63,7 @@ input MeetingInput {
 type Query {
   login(input: LoginInput): Token
   getStudent(code: String!): Student
+  getStudents(limit: Int, skip: Int): [Student]
   getMeetings(limit: Int, skip: Int ): [Meeting]
   getQuantityMeetings: Int
   getQuantityForTime(schedule: EnumSchedule!): Int

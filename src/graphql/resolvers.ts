@@ -14,6 +14,9 @@ exports.resolver = {
     getStudent: async (__:void, { code }:{ code:string }) =>
       studentControllers.getStudent(code),
 
+    getStudents: async (__:void, { limit, skip }:{limit:number, skip:number}, { user }:{user: IuserContext}) =>
+      studentControllers.getStudents(limit, skip, user),
+
     // Meeting Querys
     getMeetings: async (__:void, { limit, skip }:{limit:number, skip:number}, { user }:{user: IuserContext}) =>
       meetingControllers.getMeetings(limit, skip, user),
