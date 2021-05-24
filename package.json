@@ -16,8 +16,7 @@
     "dotenv": "^9.0.0",
     "graphql": "^15.5.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.7",
-    "schemaglue": "^4.1.0"
+    "mongoose": "^5.12.7"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",

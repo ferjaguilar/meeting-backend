@@ -4,7 +4,7 @@ import userControllers from '../controllers/userControllers';
 import studentControllers from '../controllers/studentControllers';
 import meetingControllers from '../controllers/meetingControllers';
 
-exports.resolver = {
+const resolvers = {
   Query: {
     // Users Querys
     login: async (__:void, { input }:{input:Iuser}) =>
@@ -42,3 +42,5 @@ exports.resolver = {
       meetingControllers.studentId(parent),
   },
 };
+
+export default resolvers;
