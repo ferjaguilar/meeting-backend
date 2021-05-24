@@ -1,13 +1,14 @@
 import { ApolloServer } from 'apollo-server';
-import glue from 'schemaglue';
 import connection from './database/connection';
 import { validateToken } from './utils/tokenUtils';
 
-const { schema, resolver } = glue('./src/graphql', { mode: 'ts' });
+// Schemas and resolvers
+import typeDefs from './graphql/schema';
+import resolvers from './graphql/resolvers';
 
 const server = new ApolloServer({
-  typeDefs: schema,
-  resolvers: resolver,
+  typeDefs,
+  resolvers,
   context: ({ req }) => {
     const token = req.headers.authorization || '';
     const user = validateToken(token.replace('Bearer ', ''));
