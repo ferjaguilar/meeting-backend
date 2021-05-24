@@ -1,29 +1,30 @@
-import { ApolloServer, gql } from 'apollo-server';
+import { ApolloServer } from 'apollo-server';
+import connection from './database/connection';
+import { validateToken } from './utils/tokenUtils';
 
-// The GraphQL schema
-const typeDefs = gql`
-  type Query {
-    "A simple type for getting started!"
-    hello: String
-  }
-`;
-
-// A map of functions which return data for the schema.
-const resolvers = {
-  Query: {
-    hello: () => 'world',
-  },
-};
+// Schemas and resolvers
+import typeDefs from './graphql/schema';
+import resolvers from './graphql/resolvers';
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  cors: {
+    origin: '*',
+    credentials: true,
+  },
+  context: ({ req }) => {
+    const token = req.headers.authorization || '';
+    const user = validateToken(token.replace('Bearer ', ''));
+    return { user };
+  },
 });
 
 const main = async () => {
   try {
     const { url } = await server.listen();
     console.log(`Server running on ${url}`);
+    connection();
   } catch (error) {
     throw new Error(`Server Error ${error}`);
   }
