@@ -5,8 +5,10 @@
   "main": "main.js",
   "scripts": {
     "dev": "nodemon ./src/main.ts --exec ts-node",
-    "start": "node ./dist/main.js",
-    "build": "tsc"
+    "tsc": "tsc",
+    "postinstall": "npm run tsc",
+    "build": "tsc",
+    "start": "NODE_ENV=production node ./dist/main.js"
   },
   "author": "Fernando Jose Aguilar Rivas",
   "license": "ISC",
