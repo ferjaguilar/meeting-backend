@@ -7,7 +7,7 @@
     "dev": "nodemon ./src/main.ts --exec ts-node",
     "start": "node ./dist/main.js",
     "postinstall": "npm run build",
-    "build": "tsc"
+    "build": "NODE_ENV=production tsc"
   },
   "author": "Fernando Jose Aguilar Rivas",
   "license": "ISC",
